@@ -1,0 +1,163 @@
+
+
+<!doctype html>
+<html lang="en-US" xml:lang='en' xmlns:fb='http://www.facebook.com/2008/fbml' xmlns:og='http://opengraphprotocol.org/schema/' xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<title>Diffy - Watch live movies with your friends with a web-compatible Diffy client, Node. js, Mac, Windows, & Linux.</title>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en">
+		<META NAME="ROBOTS" CONTENT="INDEX,FOLLOW">
+		<META NAME="REVISIT-AFTER" CONTENT="1days">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="author" content="https://github.com/diffyheart/">
+		<link rel="canonical" href="http://diffyheart.tk/" />
+		<meta name="description" content="Watch live movies with your friends with a web-compatible Diffy client, Node. js, Mac, Windows, & Linux.">
+		<meta property="og:title" content="Diffy - Watch live movies with your friends with a web-compatible Diffy client, Node. js, Mac, Windows, & Linux.">
+		<meta property="og:type" content="website">
+		<meta property='og:site_name' content='Diffy'>
+		<meta property="og:image" content="/img/diffyheart.png">
+		<link rel="mask-icon" href="/img/diffyheart.svg" color="#D91E18">
+		<meta name="msapplication-TileColor" content="#b91d47">
+		<meta name="msapplication-TileImage" content="/diffyheart.png">
+		<link href="/img/favicon.ico" rel="icon" type="image/x-icon">
+		<link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
+		<meta name="fragment" content="!"/>
+		<!--[if lt IE 9]>
+		<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="forkme">
+			<a href="https://github.com/diffyheart/diffyheart.github.io/">
+				<img style="position: absolute; top: 0px; right: 0px; border: 0px none; opacity: 1;" src="img/forkme.png" alt="Fork me on GitHub">
+			</a>
+		</div>
+		<div class="container">
+			<header class="header clearfix">
+				<nav>
+					<ul class="nav nav-pills float-right">
+						<div class="form-inline my-2 my-lg-0">
+						<div class="input-group">
+							<input id="roomid" type="text" class="form-control" pattern="^[a-z0-9A-Z]{5}$" minlength="5" maxlength="5" placeholder="Room ID" />
+							<span class="input-group-btn">
+								<button type="button" id="submitroomid" class="btn btn-primary" disabled="">Join <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+							</span>
+						</div>
+					</ul>
+				</nav>
+				<h3 class="text-muted animate-reveal animate-first">Diffy <font class="hearttext">&hearts;</font></h3>
+			</header>
+			<main role="main">
+				<div id="createroomdesign">
+					<div class="jumbotron">
+						<p><button id="choosemovie" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Choose a movie</button></p>
+						<!--<hr class="styleOR">
+						<div id="seeddropzone"><form action="/upload" class="dropzone needsclick dz-clickable" id="demo-upload">
+							<div class="dz-message needsclick">
+								Drop files here or click to upload.<br>
+								<span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+							</div>
+						</form></div>-->
+						<hr class="styleOR">
+						<form id="inputroom">
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">📀</span>
+									<input id="filename" type="text" class="form-control" placeholder="File accepted. Torrent, video" readonly="" />
+									<span class="input-group-btn">
+										<div class="btn btn-primary" onmouseup="$('#fileselected').click();">
+											Browse&hellip; <input id="fileselected" accept=".torrent,video/mp4,video/m4a,video/m4v" type="file" style="display: none;">
+										</div>
+									</span>
+								</div>
+							</div>
+						</form>
+						<hr class="styleOR">
+						<div class="form-group">
+							<!-- <label for="linkselected" class="col-2 col-form-label">🔗  Links</label>-->
+							<div class="input-group">
+								<span class="input-group-addon">🔗</span>
+								<input id="linkselected" class="form-control" type="text" placeholder="Torrent, Magnet" id="link-text-input" pattern="^(magnet:\?xt=urn:[a-z0-9]+:[a-z0-9]{20,50}[\S]+|https?:\/\/[\S]+?\.torrent)$" autofocus><!-- TODO: pattern="(magnet:\?xt=urn:[a-z0-9]+:[a-z0-9]{32}|http(s)?:\/\/[\S]+?\.(mp4|m4a|m4v))" -->
+							</div>
+						</div>
+						<p><button id="createroom" class="btn btn-lg btn-secondary" disabled="">Create the room</button></p>
+					</div>
+				</div>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        ...
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div id="roomdesign" style="display: none;">
+					<div class="card mb-3">
+						<div class="media-wrapper card-img-top">
+							<div class="player">
+								<video id="streamingplayer" width="640" height="360" preload="none" style="max-width:100%;" type="video/mp4" playsinline webkit-playsinline></video>
+							</div>
+						</div>
+						<div class="card-body">
+							<h4 class="card-title">The Martian <button id="playstream" class="btn btn-lg btn-danger pull-right">Play!</button></h4>
+							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							<p class="card-text">
+								<small class="text-muted">Peers : <span id="numpeers">0</span></small>
+							</p>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title"><i class="fa fa-bullhorn" aria-hidden="true"></i> Live Chat<a class="pull-right"><i class="fa fa-external-link" aria-hidden="true"></i></a></h4>
+							<ul class="list-group" id="chat-output"></ul>
+							<div class="input-group">
+								<input for="msg-submit" type="text" autocorrect="on" autocapitalize="on" class="form-control" id="chat-input" />
+								<span class="input-group-btn">
+									<button type="submit" class="btn btn-default" id="msg-submit">Send Message <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+								</span>
+							</div>
+							<div class="card-block">
+								<p class="card-text"><span class="badge badge-default">Connected: <span id="numconnected">0</span></span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row marketing">
+					<div class="col-lg-6">
+						<h4>Peer-to-Peer</h4>
+						<p>Diffy uses only open source peer-to-peer solutions to communicate or store data primarily based on WebRTC/Torrent.</p>
+						<h4>Secure</h4>
+						<p>Diffy uses a private tracker to filter the traffic of any organization.</p>
+						<h4>Design <font class="hearttext">&hearts;</font></h4>
+						<p>Diffy uses a simple, clean and fluid design for everyone's enjoyment and perfect navigation.</p>
+					</div>
+					<div class="col-lg-6">
+						<h4>Friendly 🎞️💓🍿</h4>
+						<p>With Diffy you can watch movies in 4K without downloading them live as well as in the cinema with a text chat to discuss with other viewers during your virtual session.</p>
+						<h4>Open-Source</h4>
+						<p>The Diffy source code is fully available on github under the GNU GPL-3.0 license.</p>
+						<h4>Cross-platform</h4>
+						<p>Diffy is functional on all platforms with any browser!</p>
+					</div>
+				</div>
+			</main>
+			<footer class="footer">
+				<p>&copy; <a href="https://github.com/diffyheart" target="_blank">DiffyHeart</a> <font style="color: #EB5E28;">&hearts;</font> 2017</p>
+			</footer>
+			<script src="js/runtime.js"></script>
+			<noscript>Your browser does not support JavaScript!</noscript>
+		</div>
+	</body>
+</html>
